@@ -14,10 +14,6 @@
     Scissors        Scissors        Tie
 */
 
-console.log("Hello, world!");
-
-const choices = ["rock", "paper", "scissors"];
-
 /**
  * 
  * @param {array} choices 
@@ -83,9 +79,12 @@ function playRound(playerSelection, computerSelection) {
  * @param {number} rounds - the number of rounds to play in the game.
  */
 function game(rounds) {
+    const choices = ["rock", "paper", "scissors"];
     let playerScore = 0;
     let computerScore = 0;
     let result = "";
+
+    console.log("Rock, Paper, Scissors!");
     for(i = 0; i < rounds; i++) {
         result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
         
