@@ -23,11 +23,17 @@ function getComputerChoice(choices) {
 
 function getPlayerChoice(choices) {
     let choice = prompt("Enter your choice (Rock, Paper, Scissors):").toLowerCase();
-     if (choices.includes(choice)) {
-         return choice;
-     } else {
-        throw new Error("Invalid choice. Please choose either Rock, Paper, or Scissors.");
-     } 
+    valid = false;
+
+    while(!valid) {
+        if (!choices.includes(choice)) {
+            choice = prompt("Invalid choice. Select again:");
+        } else {
+            valid = true;
+        }
+    }
+    
+    return choice; 
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -54,4 +60,22 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-console.log(playRound(getPlayerChoice(choices), getComputerChoice(choices)));
+function game(rounds) {
+    let playerScore = 0;
+    let computerScore = 0;
+    let result = "";
+    for(i = 0; i < rounds; i++) {
+        result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
+        if (result.includes("win")) {
+            playerScore += 1;
+        } else {
+            computerScore += 1;
+        }
+        console.log(result);
+    }
+    console.log(`Player: ${playerScore}`);
+    console.log(`Computer: ${computerScore}`);
+
+}
+
+game(5);
