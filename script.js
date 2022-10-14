@@ -88,6 +88,12 @@ function game(rounds) {
     let result = "";
     for(i = 0; i < rounds; i++) {
         result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
+        
+        while(result.includes("tie")) {
+            alert("It's a tie. Choose again.");
+            result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
+        }
+        
         if (result.includes("win")) {
             playerScore += 1;
         } else {
