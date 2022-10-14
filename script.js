@@ -1,5 +1,7 @@
-/* 
-    rock paper scissors game 
+/**
+    Simple implementation of rock paper scissors game.
+    
+    Possible outcomes:
     Player 1        Player 2        Result
     Rock            Paper           Player 2 Wins
     Rock            Rock            Tie
@@ -16,11 +18,21 @@ console.log("Hello, world!");
 
 const choices = ["rock", "paper", "scissors"];
 
+/**
+ * 
+ * @param {array} choices 
+ * @returns item randomly selected from choices array
+ */
 function getComputerChoice(choices) {
     const randomChoice = Math.floor(Math.random() * choices.length);
     return choices[randomChoice];
 }
 
+/**
+ * 
+ * @param {array} choices 
+ * @returns user's choice
+ */
 function getPlayerChoice(choices) {
     let choice = prompt("Enter your choice (Rock, Paper, Scissors):").toLowerCase();
     valid = false;
@@ -36,6 +48,12 @@ function getPlayerChoice(choices) {
     return choice; 
 }
 
+/**
+ * 
+ * @param {string} playerSelection 
+ * @param {string} computerSelection 
+ * @returns String describing the result of the round.
+ */
 function playRound(playerSelection, computerSelection) {
     const tie = 0;
     const win = 1;
@@ -60,6 +78,10 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
+/**
+ * 
+ * @param {number} rounds - the number of rounds to play in the game.
+ */
 function game(rounds) {
     let playerScore = 0;
     let computerScore = 0;
