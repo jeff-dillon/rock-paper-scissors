@@ -35,7 +35,7 @@ function getPlayerChoice(choices) {
 
     while(!valid) {
         if (!choices.includes(choice)) {
-            choice = prompt("Invalid choice. Select again:");
+            choice = prompt("Invalid choice. Select again:").toLowerCase();
         } else {
             valid = true;
         }
