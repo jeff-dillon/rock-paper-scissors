@@ -30,12 +30,16 @@ function getComputerChoice(choices) {
  * @returns user's choice
  */
 function getPlayerChoice(choices) {
-    let choice = prompt("Enter your choice (Rock, Paper, Scissors):").toLowerCase();
-    valid = false;
+
+    const choiceMessage = "Enter your choice (Rock, Paper, Scissors):";
+    const invalidMessage = "Invalid choice. Select again:";
+
+    let choice = prompt(choiceMessage).toLowerCase();
+    let valid = false;
 
     while(!valid) {
         if (!choices.includes(choice)) {
-            choice = prompt("Invalid choice. Select again:").toLowerCase();
+            choice = prompt(invalidMessage).toLowerCase();
         } else {
             valid = true;
         }
@@ -80,16 +84,19 @@ function playRound(playerSelection, computerSelection) {
  */
 function game(rounds) {
     const choices = ["rock", "paper", "scissors"];
+    const tieMessage = "It's a tie. Choose again.";
+    const gameTitleMessage = "Rock, Paper, Scissors!";
+
     let playerScore = 0;
     let computerScore = 0;
     let result = "";
 
-    console.log("Rock, Paper, Scissors!");
+    console.log(gameTitleMessage);
     for(i = 0; i < rounds; i++) {
         result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
         
         while(result.includes("tie")) {
-            alert("It's a tie. Choose again.");
+            alert(tieMessage);
             result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
         }
         
