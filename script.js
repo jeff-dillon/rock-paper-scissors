@@ -15,7 +15,7 @@
 */
 
 /**
- * 
+ * Randomly selects a choice for the computer.
  * @param {array} choices 
  * @returns item randomly selected from choices array
  */
@@ -25,7 +25,7 @@ function getComputerChoice(choices) {
 }
 
 /**
- * 
+ * Prompts the user for a choice and validates the input.
  * @param {array} choices 
  * @returns user's choice
  */
@@ -49,7 +49,8 @@ function getPlayerChoice(choices) {
 }
 
 /**
- * 
+ * Takes the player and computer selections, determines the result, and returns
+ * a message describing the result.
  * @param {string} playerSelection 
  * @param {string} computerSelection 
  * @returns String describing the result of the round.
@@ -58,8 +59,8 @@ function playRound(playerSelection, computerSelection) {
     const tie = 0;
     const win = 1;
     const lose = 2;
-    const messages = ["You tie!", "You win!", "You lose!"];
-    const comparison = ["ties with", "beats", "loses to"];
+    const resultMessage = ["You tie!", "You win!", "You lose!"];
+    const comparisonMessage = ["ties with", "beats", "loses to"];
 
     let result = undefined;
     if(playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
@@ -74,12 +75,12 @@ function playRound(playerSelection, computerSelection) {
         result = lose;
     }
 
-    return `${messages[result]} ${playerSelection} ${comparison[result]} ${computerSelection}`;
+    return `${resultMessage[result]} ${playerSelection} ${comparisonMessage[result]} ${computerSelection}`;
 
 }
 
 /**
- * 
+ * Main function to control the game play.
  * @param {number} rounds - the number of rounds to play in the game.
  */
 function game(rounds) {
@@ -89,27 +90,29 @@ function game(rounds) {
 
     let playerScore = 0;
     let computerScore = 0;
-    let result = "";
+    let resultMessage = "";
+    let i = 0;
 
     console.log(gameTitleMessage);
     for(i = 0; i < rounds; i++) {
-        result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
+        resultMessage = playRound(getPlayerChoice(choices), getComputerChoice(choices));
         
-        while(result.includes("tie")) {
+        while(resultMessage.includes("tie")) {
             alert(tieMessage);
-            result = playRound(getPlayerChoice(choices), getComputerChoice(choices));
+            resultMessage = playRound(getPlayerChoice(choices), getComputerChoice(choices));
         }
         
-        if (result.includes("win")) {
+        if (resultMessage.includes("win")) {
             playerScore += 1;
         } else {
             computerScore += 1;
         }
-        console.log(result);
+        console.log(resultMessage);
     }
     console.log(`Player: ${playerScore}`);
     console.log(`Computer: ${computerScore}`);
 
 }
 
+/*  start the game with 5 rounds */
 game(5);
