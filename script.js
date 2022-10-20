@@ -120,10 +120,10 @@ function game(rounds) {
 
 
 const btnList = document.querySelectorAll(".select-btn");
+const gameBtn = document.querySelector(".game-btn");
 let playerScore = 0;
 let computerScore = 0;
 
-const gameBtn = document.querySelector(".game-btn");
 
 function handleSelection(e) {
     const result = playRound(e.srcElement.id);
@@ -137,7 +137,9 @@ function checkGame() {
     const computerScore = document.querySelector("#computer-score");
     const currentPlayerScore = Number(playerScore.textContent);
     const currentComputerScore = Number(computerScore.textContent);
-    if(currentComputerScore + currentPlayerScore == 5) {
+    const numRoundsSelector = document.querySelector("#num-rounds");
+    const numRounds = Number(numRoundsSelector.value);
+    if(currentComputerScore + currentPlayerScore == numRounds) {
         displayRoundResult("Game Over");
         toggleButtons();
     } 
@@ -150,6 +152,7 @@ function displayRoundResult(result) {
 
 function updateScore(result) {
     if(result.includes('tie')) return;
+    
     if(result.includes('win')) {
         const playerScore = document.querySelector("#player-score");
         const currentScore = Number(playerScore.textContent);
@@ -163,8 +166,8 @@ function updateScore(result) {
 
 function clearScores() {
     const playerScore = document.querySelector("#player-score");
-    playerScore.textContent = "0";
     const computerScore = document.querySelector("#computer-score");
+    playerScore.textContent = "0";
     computerScore.textContent = "0";
 }
 
@@ -185,6 +188,7 @@ function handleGame(e) {
     clearScores();
     toggleButtons();
 }
+
 
 btnList.forEach(btn => btn.addEventListener('click', handleSelection));
 gameBtn.addEventListener('click', handleGame);
