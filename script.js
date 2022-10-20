@@ -125,12 +125,14 @@ let computerScore = 0;
 
 function handleSelection(e) {
     const result = playRound(e.srcElement.id);
-
-    const resultDiv = document.querySelector(".result");
-    resultDiv.textContent = result;
-
+    displayRoundResult(result);
     updateScore(result);
 };
+
+function displayRoundResult(result) {
+    const resultDiv = document.querySelector(".result");
+    resultDiv.textContent = result;
+}
 
 function updateScore(result) {
     if(result.includes('tie')) return;
