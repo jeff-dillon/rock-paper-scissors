@@ -119,15 +119,29 @@ function game(rounds) {
 }
 
 
-const btnList = document.querySelectorAll(".btn");
+const btnList = document.querySelectorAll(".select-btn");
 let playerScore = 0;
 let computerScore = 0;
+
+const gameBtn = document.querySelector(".game-btn");
 
 function handleSelection(e) {
     const result = playRound(e.srcElement.id);
     displayRoundResult(result);
     updateScore(result);
+    checkGame();
 };
+
+function checkGame() {
+    const playerScore = document.querySelector("#player-score");
+    const computerScore = document.querySelector("#computer-score");
+    const currentPlayerScore = Number(playerScore.textContent);
+    const currentComputerScore = Number(computerScore.textContent);
+    if(currentComputerScore + currentPlayerScore == 5) {
+        displayRoundResult("Game Over");
+        toggleButtons();
+    } 
+}
 
 function displayRoundResult(result) {
     const resultDiv = document.querySelector(".result");
@@ -147,4 +161,30 @@ function updateScore(result) {
     }
 }
 
+function clearScores() {
+    const playerScore = document.querySelector("#player-score");
+    playerScore.textContent = "0";
+    const computerScore = document.querySelector("#computer-score");
+    computerScore.textContent = "0";
+}
+
+function toggleButtons() {
+    const gameButton = document.querySelector("#game-button");
+    const selectionButtons = document.querySelector("#selection-buttons");
+    if (gameButton.classList.contains("hidden")) {        
+        selectionButtons.classList.add('hidden');
+        gameButton.classList.remove("hidden");
+    } else {
+        selectionButtons.classList.remove('hidden');
+        gameButton.classList.add("hidden");
+    }
+}
+
+function handleGame(e) {
+    displayRoundResult("");
+    clearScores();
+    toggleButtons();
+}
+
 btnList.forEach(btn => btn.addEventListener('click', handleSelection));
+gameBtn.addEventListener('click', handleGame);
