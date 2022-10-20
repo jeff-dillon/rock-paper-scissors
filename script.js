@@ -55,12 +55,16 @@ function getPlayerChoice(choices) {
  * @param {string} computerSelection 
  * @returns String describing the result of the round.
  */
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
     const tie = 0;
     const win = 1;
     const lose = 2;
     const resultMessage = ["You tie!", "You win!", "You lose!"];
     const comparisonMessage = ["ties with", "beats", "loses to"];
+    const choices = ["rock", "paper", "scissors"];
+
+
+    computerSelection = getComputerChoice(choices);
 
     let result = undefined;
     if(playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
@@ -114,5 +118,31 @@ function game(rounds) {
 
 }
 
-/*  start the game with 5 rounds */
-game(5);
+
+const btnList = document.querySelectorAll(".btn");
+let playerScore = 0;
+let computerScore = 0;
+
+function handleSelection(e) {
+    const result = playRound(e.srcElement.id);
+
+    const resultDiv = document.querySelector(".result");
+    resultDiv.textContent = result;
+
+    updateScore(result);
+};
+
+function updateScore(result) {
+    if(result.includes('tie')) return;
+    if(result.includes('win')) {
+        const playerScore = document.querySelector("#player-score");
+        const currentScore = Number(playerScore.textContent);
+        playerScore.textContent = String(currentScore + 1);
+    } else {
+        const computerScore = document.querySelector("#computer-score");
+        const currentScore = Number(computerScore.textContent);
+        computerScore.textContent = String(currentScore + 1);
+    }
+}
+
+btnList.forEach(btn => btn.addEventListener('click', handleSelection));
